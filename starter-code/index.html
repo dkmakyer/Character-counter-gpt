@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="index.css">
+
+  <title>Frontend Mentor | Character counter</title>
+</head>
+
+<body>
+  <main class="text-analyzer-container">
+    <header class="header">
+      <div class="theme-changer">
+        <img src="./assets/images/logo-dark-theme.svg" alt="counter-logo" aria-hidden="true">
+        <span class="light-mode-icon">
+          <img src="./assets/images/icon-sun.svg" alt="light-mode-icon">
+        </span>
+      </div>
+    </header>
+
+    <section aria-labelledby="main-heading">
+      <div class="description-heading">
+        <h1 style="font-family: DMSans;">Analyze your text <span>in real-time.</span></h1>
+      </div>
+    </section>
+
+    <section aria-labelledby="text-description">
+      <textarea class="description" placeholder="Start Typing here...(or paste your text)"></textarea>
+    </section>
+
+    <fieldset class="options">
+      <div class="option-group">
+        <input type="checkbox" id="excludeSpaces" name="analysis-options">
+        <label for="excludeSpaces">Exclude Spaces</label>
+      </div>
+      <div class="option-group">
+        <input type="checkbox" id="setCharacterLimit" name="analysis-options">
+        <label for="setCharacterLimit">Set Character Limit</label>
+      </div>
+      <span class="reading-time">Approx. reading time: &lt;1 minute</span>
+    </fieldset>
+
+    <section class="stats" aria-labelledby="stats-details">
+      <div class="stat stat1" role="figure" aria-label="Total characters">
+        <output class="number" id="total-chars">278</output>
+        <p>Total Characters</p>
+      </div>
+      <div class="stat stat2" role="figure" aria-label="Word count">
+        <output class="number" id="word-count">39</output>
+        <p>Word Count</p>
+      </div>
+      <div class="stat stat3" role="figure" aria-label="Sentence count">
+        <output class="number" id="sentence-count">04</output>
+        <p>Sentence Count</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="letter-density">
+      <h2 id="letter-density" class="letter-density-title">Letter Density</h2>
+      <div class="letter-density-list">
+        <article class="letter-density-item" role="listitem">
+          <span class="letter">E</span>
+          <div class="bar-container">
+            <div class="bar" style="width: 20%;"></div>
+          </div>
+          <span class="percentage">40 (16.06%)</span>
+        </article>
+        <article class="letter-density-item" role="listitem">
+          <span class="letter">I</span>
+          <div class="bar-container">
+            <div class="bar" style="width: 19%;"></div>
+          </div>
+          <span class="percentage">29 (11.65%)</span>
+        </article>
+        <article class="letter-density-item" role="listitem">
+          <span class="letter">T</span>
+          <div class="bar-container">
+            <div class="bar" style="width: 15%;"></div>
+          </div>
+          <span class="percentage">28 (11.24%)</span>
+        </article>
+        <article class="letter-density-item" role="listitem">
+          <span class="letter">O</span>
+          <div class="bar-container">
+            <div class="bar" style="width: 11%;"></div>
+          </div>
+          <span class="percentage">22 (8.84%)</span>
+        </article>
+        <article class="letter-density-item" role="listitem">
+          <span class="letter">N</span>
+          <div class="bar-container">
+            <div class="bar" style="width: 5%;"></div>
+          </div>
+          <span class="percentage">21 (8.43%)</span>
+        </article>
+      </div>
+    </section>
+    <section class="show-more" aria-label="Show more list details that do not fit on screen">
+      <button type="button" aria-expanded="false">show-more</button>
+    </section>
+  </main>
+</body>
+
+</html>
