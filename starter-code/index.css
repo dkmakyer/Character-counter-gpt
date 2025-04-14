@@ -1,4 +1,3 @@
-/*importing the fonts */
 @font-face {
   font-family: "DMSansRegular";
   src: url("./assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
@@ -12,7 +11,6 @@
   src: url("./assets/fonts/DM_Sans/static/DMSans-Medium.ttf");
 }
 
-/* Base Styles */
 :root {
   --primary-bg: #12131a;
   --text-color: #e4e4ef;
@@ -26,22 +24,16 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  margin: 0;
-  padding: 1rem;
+  font-family: "DMSansRegular", sans-serif;
   background-color: var(--primary-bg);
   color: var(--text-color);
-  line-height: 1.5;
-  font-size: 1rem;
-  font-family: "DMSansRegular", sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 .text-analyzer-container {
   width: 100%;
-  max-width: 60rem;
+  min-width: 375px;
   padding: 1rem;
   margin: 0 auto;
   display: flex;
@@ -49,9 +41,10 @@ body {
 }
 
 header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 40px;
   width: 100%;
 }
+
 .theme-changer {
   display: flex;
   align-items: center;
@@ -73,27 +66,34 @@ header {
 }
 
 .description-heading {
-    margin: 0 auto;
-  font-size: 2.4rem;
-  width: 100%;
-  max-width: 30rem;
-  font-weight: 600;
-  margin-bottom: 5rem;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+.description-heading h1{
+  margin: 0 auto;
+  justify-content: space-between;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: -1px;
+  font-family: "DMSansBold", sans-serif;
 }
 
 textarea {
-  width: 100%;
+  min-width: 100%;
+  line-height: 140%;
+  letter-spacing: -0.6px;
   box-sizing: border-box;
+  color: var(--text-color);
   padding: 1rem;
   border-radius: var(--border-radius);
   border: none;
+  margin: 0 auto;
   background-color: var(--faded-purple);
-  color: var(--text-color);
   font-family: inherit;
-  font-size: inherit;
+  font-size: 20px;
   resize: none;
-  min-height: 170px;
-  margin-bottom: 0.5rem;
+  height: 200px;
+  margin-bottom: 1rem;
 }
 
 textarea.description::placeholder {
@@ -106,54 +106,52 @@ textarea:focus {
 }
 
 fieldset {
-  width: 100%;
+  min-width: 343px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   border: none;
+  gap: 12px;
+  padding: 0;
+  margin-bottom: 40px;
 }
 
 input[type="checkbox"] {
-  min-width: 1.5em;
+  width: 16px;
   border: none;
-  min-height: 1.5em;
+  height: 16px;
   border: 1px solid var(--purple);
   border-radius: 5px;
   background-color: var(--faded-purple);
   appearance: checkbox;
 }
 
-fieldset div,
-fieldset div:last-child {
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-fieldset div:last-child {
-  margin-left: 1rem;
-}
-
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 1rem;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 .stat {
   border-radius: 5px;
-  max-width: 17rem;
-  padding: 1rem;
-  height: 7rem;
+  padding: 27px 20px;
+  height: 130px;
   color: var(--primary-bg);
+  box-sizing: border-box;
 }
 
 output {
-  font-size: 64px;
-  font-weight: 700;
-  display: block;
+  font-size: 40px;
+  font-family: "DMSansBold", sans-serif;
+  line-height: 100%;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
 }
 .stat p {
-  transform: translateY(-1.5rem);
+  font-size: 20px;
+  line-height: 140%;
+  letter-spacing: -0.6px;
 }
 
 .stat1,
@@ -203,32 +201,40 @@ output {
 }
 
 .letter-density-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 24px;
+  letter-spacing: -1px;
+  line-height: 130%;
+  margin-bottom: 20px;
+  font-family: "DMSansMedium", sans-serif;
 }
 
 .letter-density-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 12px;
   width: 100%;
 }
 
 .letter-density-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
   align-items: center;
-  height: 31px;
+  height: 21px;
   position: relative;
   width: 100%;
-  transform: translateX(0.1rem);
 }
 
 .letter {
-  width: 2rem;
+  width: 1rem;
+  height: 21px;
+  font-size: 16px;
 }
 
 .bar-container {
-  width: 85%;
+  width: 70%;
+  position: absolute;
+  left: 2rem;
   background-color: var(--faded-purple);
   height: 12px;
   margin: 0 0.5rem;
@@ -246,14 +252,16 @@ output {
   position: absolute;
   right: 0;
 }
+
 .show-more button {
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: 1rem;
-  color: var(--purple);
+  font-size: 20px;
+  color: var(--text-color);
   transform: translate(-0.3rem, 1rem);
   margin-bottom: 2rem;
+  line-height: 140%;
   height: 2rem;
 }
 .show-more button:hover {
@@ -261,47 +269,56 @@ output {
   background-color: var(--faded-purple);
 }
 
-@media (max-width: 768px) {
-  /* Tablet */
-  body {
-    padding: 2rem;
-  }
+@media (min-width: 768px) {
   .text-analyzer-container {
+    padding: 1rem 32px;
     width: 100%;
   }
-  .description-heading {
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0 auto;
+  .description-heading h1{
+    font-size: 64px;
+    width: 550px;
+    display: flex;
+    flex-direction:column;
+  }
+
+  fieldset {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .option-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stat {
+    height: 150px;
+  }
+  output {
+    font-size: 64px;
+    line-height: 100%;
+  }
+  .bar-container {
+    width: 85%;
   }
 }
 
-@media (max-width: 376px) {
-  /* Mobile */
-  .text-analyzer-container {
-    width: 100%;
-    max-width: 100vw;
-    padding: 1rem;
+@media (min-width: 1080px){
+  .text-analyzer-container{
+    padding: 2rem 14rem;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .description-heading {
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  fieldset {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    border: none;
-    padding-left: 0;
+  max-width: 990px;
   }
 }
