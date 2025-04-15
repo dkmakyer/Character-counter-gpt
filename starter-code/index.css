@@ -96,6 +96,14 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.error-message{
+  color: #FE8159;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: -0.6px;
+  transform: translateY(-1rem);
+}
+
 textarea.description::placeholder {
   color: var(--text-color);
 }
@@ -107,6 +115,7 @@ textarea:focus {
 
 fieldset {
   min-width: 343px;
+  height: 29px;
   display: grid;
   grid-template-columns: 1fr;
   border: none;
@@ -116,14 +125,54 @@ fieldset {
 }
 
 input[type="checkbox"] {
+  position: relative;
+  appearance: none;
   width: 16px;
-  border: none;
   height: 16px;
   border: 1px solid var(--purple);
   border-radius: 5px;
-  background-color: var(--faded-purple);
-  appearance: checkbox;
+  cursor: pointer;
 }
+input[type="checkbox"]::before {
+  content: " ";
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 40%;
+  height: 70%;
+  left: 3px;
+  border: solid var(--purple);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+input[type="checkbox"]:checked::before {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.styled-limiter {
+  display: none; 
+  width: 55px;
+  background-color: transparent;
+  border: 1px solid var(--purple); 
+  appearance: none;
+  -moz-appearance: textfield; 
+  color: var(--purple); 
+  padding: 4px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.styled-limiter::-webkit-outer-spin-button,
+.styled-limiter::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 .stats {
   display: grid;

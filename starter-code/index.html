@@ -27,7 +27,10 @@
     </section>
     
     <section aria-labelledby="text-description">
-      <textarea class="description" placeholder="Start Typing here...(or paste your text)"id="description"></textarea>
+      <textarea class="description" placeholder="Start Typing here...(or paste your text)" id="description"></textarea>
+        <p class="error-message hidden" id="error-message">
+          Limit reached! your text exceeds <span id="set-limit">300</span> characters.
+        </p>
     </section>
     
     <fieldset>
@@ -37,9 +40,9 @@
           <label for="excludeSpaces">Exclude Spaces</label>
         </div>
         <div class="option-group">
-          <input type="checkbox" id="setCharacterLimit" name="analysis-options">
-          <label for="setCharacterLimit">Set Character Limit</label>
-          <input type="number" id="characterLimit" style="display:none;">
+          <input type="checkbox" id="limit-checkbox" name="analysis-options">
+          <label for="limit-checkbox">Set Character Limit</label>
+          <input type="number" id="characterLimitInput" class="styled-limiter hidden">
         </div>
       </div>
       <span class="reading-time">Approx. reading time: &lt;1 minute</span>
@@ -47,15 +50,15 @@
     
     <section class="stats" aria-labelledby="stats-details">
       <div class="stat stat1" role="figure" aria-label="Total characters">
-        <output class="number" id="charCount">278</output>
+        <output class="number" id="charCount">00</output>
         <p>Total Characters</p>
       </div>
       <div class="stat stat2" role="figure" aria-label="Word count">
-        <output class="number" id="wordCount">39</output>
+        <output class="number" id="wordCount">00</output>
         <p>Word Count</p>
       </div>
       <div class="stat stat3" role="figure" aria-label="Sentence count">
-        <output class="number" id="sentenceCount">04</output>
+        <output class="number" id="sentenceCount">00</output>
         <p>Sentence Count</p>
       </div>
     </section>
