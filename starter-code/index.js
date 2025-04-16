@@ -134,10 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // to create the tag to look like the html code
         let totalCharacters = Array.from(textObject.values()).reduce((acc, count) => acc + count, 0); // Calculate total characters
 
+        const letterDensityList = document.getElementById("letter-density-list");
+        letterDensityList.innerText = "";
+        
         for (let [key, value] of textObject) {
             let currentPercentage = Math.floor((value / totalCharacters) * 100); // Calculate percentage
-
-            const letterDensityList = document.getElementById("letter-density-list");
 
             const articleTag = document.createElement("article");
             articleTag.classList.add("letter-density-item");
