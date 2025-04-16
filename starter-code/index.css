@@ -19,7 +19,7 @@
   --gray-700: #4b5563;
   --blue-400: #60a5fa;
   --border-radius: 0.5rem;
-  --purple: #d3a0fa;
+  --purple: #D3A0fA;
   --faded-purple: #2a2b37;
 }
 
@@ -248,6 +248,10 @@ output {
 .stat3::after {
   background-image: url("./assets/images/pattern-sentence-count.svg");
 }
+
+/* #no-space-indicator{
+  display: none;
+} */
 
 .letter-density-title {
   font-size: 24px;

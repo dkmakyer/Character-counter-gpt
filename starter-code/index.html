@@ -15,9 +15,9 @@
   <main class="text-analyzer-container">
     <header class="header">
       <div class="theme-changer">
-        <img src="./assets/images/logo-dark-theme.svg" alt="counter-logo" aria-hidden="true">
-        <span class="light-mode-icon">
-          <img src="./assets/images/icon-sun.svg" alt="light-mode-icon">
+        <img src="./assets/images/logo-dark-theme.svg" id="logo-image" alt="counter-logo" aria-hidden="true">
+        <span class="light-mode-icon" id="background-mode-setter">
+          <img src="./assets/images/icon-sun.svg" alt="light-mode-icon" id="theme-icon">
         </span>
       </div>
     </header>
@@ -51,7 +51,7 @@
     <section class="stats" aria-labelledby="stats-details">
       <div class="stat stat1" role="figure" aria-label="Total characters">
         <output class="number" id="charCount">00</output>
-        <p>Total Characters</p>
+        <p id="char-text-tag">Total Characters</p>
       </div>
       <div class="stat stat2" role="figure" aria-label="Word count">
         <output class="number" id="wordCount">00</output>

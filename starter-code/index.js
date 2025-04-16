@@ -6,16 +6,52 @@ document.addEventListener("DOMContentLoaded", function () {
     const sentenceCount = document.getElementById("sentenceCount");
     const charLimitInput = document.getElementById("characterLimitInput");
     const charLimitCheckbox = document.getElementById("limit-checkbox");
-    const setLimit = document.getElementById("set-limit");
-    const errorMessage = document.getElementById("error-message");
-
+    const setLimit = document.getElementById("set-limit");//for the error messages' number itself
+    const errorMessage = document.getElementById("error-message");//the entire error message tag
+    const excludeSpacesCheckbox = document.getElementById("excludeSpaces");
+    const backgroundModeSetter = document.getElementById("background-mode-setter");
+    const body = document.body;
+    const charTextTag = document.getElementById("char-text-tag");
+    const statText = document.querySelectorAll(".stat");
+    const logoImage = document.getElementById("logo-image");
+    const themeIcon = document.getElementById("theme-icon");
+    const barContainer = document.querySelectorAll(".bar-container");
+    
+    let modeToggled = false;
+    
+    backgroundModeSetter.addEventListener("click", function(){
+        modeToggled = !modeToggled;//dynamically change the theme
+        if(modeToggled){//for light mode
+            document.documentElement.style.setProperty("--primary-bg", "#F2F2F7");
+            document.documentElement.style.setProperty("--text-color", "#12131A");
+            statText.forEach(stat => stat.style.color = "#12131A");
+            logoImage.setAttribute("src", "./assets/images/logo-light-theme.svg");
+            themeIcon.setAttribute("src", "./assets/images/icon-moon.svg");
+            description.style.backgroundColor = "#DEBAFC";
+            barContainer.forEach(container => container.style.backgroundColor = "#DEBAFC");
+        }else{
+            document.documentElement.style.setProperty("--primary-bg", "#12131A");
+            document.documentElement.style.setProperty("--text-color", "#E4E4EF");
+            statText.forEach(stat => stat.style.color = "#12131A");
+            logoImage.setAttribute("src", "./assets/images/logo-dark-theme.svg");
+            themeIcon.setAttribute("src", "./assets/images/icon-sun.svg");
+            description.style.backgroundColor = "#21222C";
+            barContainer.forEach(container => container.style.backgroundColor = "#21222C");
+        }
+    })
+    
     // toggle display of the character limit input when checkbox is clicked
     charLimitCheckbox.addEventListener("click", function () {
         if (charLimitInput.style.display === "block") {
-            charLimitInput.style.display = "none";
+            charLimitInput.style.display = "none";//hide the input that receives the character limit number
         } else {
             charLimitInput.style.display = "block";
         }
+    });
+    
+    // update counts when the excludeSpaces checkbox is toggled
+    excludeSpacesCheckbox.addEventListener("change", function () {
+        validateTextArea(); // re-run validation with new space setting
     });
 
     // update the displayed limit value and re-validate text area on every change in limit input
@@ -24,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isNaN(userSetLimit) && userSetLimit > 0) {
             setLimit.innerText = userSetLimit;
         } else {
-            setLimit.innerText = "--";
+            setLimit.innerText = "00";
         }
         validateTextArea(); // re-validate whenever limit changes
     });
@@ -37,12 +73,20 @@ document.addEventListener("DOMContentLoaded", function () {
         // to extract the textArea input
         const descriptionText = description.value; // this is a big string
 
+        // check whether spaces should be excluded
+        let processedText = null;
+        if(excludeSpacesCheckbox.checked){
+            processedText = descriptionText.replace(/\s+/g, "");
+            charTextTag.innerText = "Total Characters(no space)"
+        } else {
+            processedText = descriptionText;
+            charTextTag.innerText = "Total Characters"
+        }
+
         // to update the number of characters
-        const descriptionTextLength = descriptionText.length;
+        const descriptionTextLength = processedText.length;
         charCount.innerText = String(descriptionTextLength).padStart(2, "0");
 
-        // there is a bug for when there is symbol before a new word, the word is not counted. fix it
-        // to update the number of words
         let wordArray = descriptionText.split(/[\s.:;!?(){}\[\]]+/);
         let validWordCount = 0;
         for (let word of wordArray) {
@@ -61,10 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // to set the character limit
         let userSetLimit = parseInt(charLimitInput.value); // extract the number from the limit input tag
         if (!isNaN(userSetLimit) && descriptionTextLength > userSetLimit) {
-            description.style.border = "2px solid #FE8159";
+            // description.style.border = `2px solid ${}`;
             description.style.boxShadow = "0 0 5px 5px var(--faded-purple)";
             description.setAttribute("readonly", "true"); // to make it reject any input after exceeding the character limit
-            errorMessage.style.display = "block";
+            errorMessage.style.display = "inline-block";
             setLimit.innerText = userSetLimit;
         } else {
             description.style.border = "";
@@ -73,5 +117,4 @@ document.addEventListener("DOMContentLoaded", function () {
             errorMessage.style.display = "none";
         }
     }
-
 });
