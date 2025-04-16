@@ -122,48 +122,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //to add the progress per character typed into the text area
         let textObject = new Map(); // an object to keep count of every character
-        
-        for (let char of descriptionText) {
-            char = char.trim().toLowerCase(); // to remove and omit the empty spaces and unify case
-            if (char) { // Check if char is not an empty string
-                textObject.set(char, (textObject.get(char) || 0) + 1); // updating the count
-            }
-        }
-        console.log(textObject);
 
-        // to create the tag to look like the html code
-        let totalCharacters = Array.from(textObject.values()).reduce((acc, count) => acc + count, 0); // Calculate total characters
+for (let char of descriptionText) {
+    char = char.trim().toLowerCase(); // to remove and omit the empty spaces and unify case
+    if (char) { // Check if char is not an empty string
+        textObject.set(char, (textObject.get(char) || 0) + 1); // updating the count
+    }
+}
+console.log(textObject);
 
-        const letterDensityList = document.getElementById("letter-density-list");
-        letterDensityList.innerText = "";
-        
-        for (let [key, value] of textObject) {
-            let currentPercentage = Math.floor((value / totalCharacters) * 100); // Calculate percentage
+// to create the tag to look like the html code
+let totalCharacters = Array.from(textObject.values()).reduce((acc, count) => acc + count, 0); // Calculate total characters
 
-            const articleTag = document.createElement("article");
-            articleTag.classList.add("letter-density-item");
-            articleTag.setAttribute("role", "list-item");
-            letterDensityList.appendChild(articleTag);
+const letterDensityList = document.getElementById("letter-density-list");
+letterDensityList.innerText = "";
 
-            const letter = document.createElement("span");
-            letter.classList.add("letter");
-            letter.innerText = key; // should display the letter value after looping through the text object
-            articleTag.appendChild(letter);
+const sortedTextObject = new Map([...textObject.entries()].sort()); // sort the textObject by keys
 
-            const barWrapper = document.createElement("div");
-            barWrapper.classList.add("bar-container");
-            articleTag.appendChild(barWrapper);
+for (let [key, value] of sortedTextObject) {
+    let currentPercentage = Math.floor((value / totalCharacters) * 100); // Calculate percentage
 
-            const bar = document.createElement("div");
-            bar.classList.add("bar");
-            bar.style.width = `${currentPercentage}%`; // should correspond to the count out of 100% of the entire text area text
-            barWrapper.appendChild(bar);
+    const articleTag = document.createElement("article");
+    articleTag.classList.add("letter-density-item");
+    articleTag.setAttribute("role", "list-item");
+    letterDensityList.appendChild(articleTag);
 
-            const percentage = document.createElement("span");
-            percentage.classList.add("percentage");
-            percentage.innerText = `${value} (${currentPercentage}%)`;
-            articleTag.appendChild(percentage);
-        }
+    const letter = document.createElement("span");
+    letter.classList.add("letter");
+    letter.innerText = key; // should display the letter value after looping through the text object
+    articleTag.appendChild(letter);
+
+    const barWrapper = document.createElement("div");
+    barWrapper.classList.add("bar-container");
+    articleTag.appendChild(barWrapper);
+
+    const bar = document.createElement("div");
+    bar.classList.add("bar");
+    bar.style.width = `${currentPercentage}%`; // should correspond to the count out of 100% of the entire text area text
+    barWrapper.appendChild(bar);
+
+    const percentage = document.createElement("span");
+    percentage.classList.add("percentage");
+    percentage.innerText = `${value} (${currentPercentage}%)`;
+    articleTag.appendChild(percentage);
+}
+
     }
 });
 
