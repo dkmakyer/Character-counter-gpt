@@ -249,10 +249,6 @@ output {
   background-image: url("./assets/images/pattern-sentence-count.svg");
 }
 
-/* #no-space-indicator{
-  display: none;
-} */
-
 .letter-density-title {
   font-size: 24px;
   letter-spacing: -1px;
@@ -320,6 +316,12 @@ output {
 .show-more button:hover {
   cursor: pointer;
   background-color: var(--faded-purple);
+}
+
+.show-more-icon{
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(1.1rem);
 }
 
 @media (min-width: 768px) {

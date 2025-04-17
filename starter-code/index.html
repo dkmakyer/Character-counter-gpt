@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-    <link rel="stylesheet" href="index.css">
-    
-    <title>Frontend Mentor | Character counter</title>
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="index.css">
+
+  <title>Frontend Mentor | Character counter</title>
+</head>
 
 <body>
   <main class="text-analyzer-container">
@@ -21,18 +21,18 @@
         </span>
       </div>
     </header>
-    
+
     <section class="description-heading" aria-labelledby="main-heading">
       <h1>Analyze your text <span>in real-time.</span></h1>
     </section>
-    
+
     <section aria-labelledby="text-description">
       <textarea class="description" placeholder="Start Typing here...(or paste your text)" id="description"></textarea>
-        <p class="error-message hidden" id="error-message">
-          Limit reached! your text exceeds <span id="set-limit">300</span> characters.
-        </p>
+      <p class="error-message hidden" id="error-message">
+        <img src="./assets/images/icon-info.svg" alt="warning-icon"> Limit reached! your text exceeds <span id="set-limit">300</span> characters.
+      </p>
     </section>
-    
+
     <fieldset>
       <div class="options">
         <div class="option-group">
@@ -47,7 +47,7 @@
       </div>
       <span class="reading-time">Approx. reading time: &lt;1 minute</span>
     </fieldset>
-    
+
     <section class="stats" aria-labelledby="stats-details">
       <div class="stat stat1" role="figure" aria-label="Total characters">
         <output class="number" id="charCount">00</output>
@@ -62,7 +62,7 @@
         <p>Sentence Count</p>
       </div>
     </section>
-    
+
     <section aria-labelledby="letter-density">
       <h2 id="letter-density" class="letter-density-title">Letter Density</h2>
       <div class="letter-density-list" id="letter-density-list">
@@ -105,12 +105,12 @@
       </div>
     </section>
 
-    <!-- <section class="show-more" aria-label="Show more list details that do not fit on screen">
-      <button type="button" aria-expanded="false">show-more</button>
-    </section> -->
+    <section class="show-more" id="show-more-container" aria-label="Show more list details that do not fit on screen">
+      <button type="button" aria-expanded="false">show-more</button><img class="show-more-icon" src="./assets/images/caret-down.svg" alt="show-more-icon">
+    </section>
   </main>
   <script src="index.js"></script>
-  
+
 </body>
 
 </html>

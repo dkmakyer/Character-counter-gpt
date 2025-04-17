@@ -17,8 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const themeIcon = document.getElementById("theme-icon");
   const barContainer = document.querySelectorAll(".bar-container");
   const noCharMessage = document.getElementById("no-char-message");
+  const showMoreContainer = document.getElementById("show-more-container");
+  const showMoreButton = document.getElementById("show-more-button");
 
   let modeToggled = false;
+  let showMore = false;
 
   backgroundModeSetter.addEventListener("click", function () {
     modeToggled = !modeToggled; //dynamically change the theme
@@ -73,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // validate textarea on every input
   description.addEventListener("input", validateTextArea);
+//   showMoreContainer.addEventListener("click", function(){
+//     showMore = !showMore;
+//   })
 
   // this function handles all textarea validation and updates
   function validateTextArea() {
@@ -130,24 +136,25 @@ document.addEventListener("DOMContentLoaded", function () {
     let textObject = new Map(); // an object to keep count of every character
 
     for (let char of descriptionText) {
-      char = char.trim().toLowerCase(); // to remove and omit the empty spaces and unify case
-      if (char) {
+      char = char.trim().toUpperCase(); // to remove and omit the empty spaces and unify case
+      if (char && /^[A-Z]$/.test(char)) {
         // Check if char is not an empty string
         textObject.set(char, (textObject.get(char) || 0) + 1); // updating the count
       }
     }
-    console.log(textObject);
 
     // to create the tag to look like the html code
     let totalCharacters = Array.from(textObject.values()).reduce(
       (acc, count) => acc + count,
       0
-    ); // Calculate total characters
+    ); 
 
     const letterDensityList = document.getElementById("letter-density-list");
     letterDensityList.innerText = "";
 
-    const sortedTextObject = new Map([...textObject.entries()].sort()); // sort the textObject by keys
+    const sortedTextObject = new Map(showMore ? [...textObject.entries()].sort().slice(0,5) : [...textObject.entries()].sort()); // sort the textObject by keys
+
+
 
     for (let [key, value] of sortedTextObject) {
       let currentPercentage = Math.floor((value / totalCharacters) * 100); // Calculate percentage
