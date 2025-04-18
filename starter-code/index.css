@@ -132,6 +132,7 @@ input[type="checkbox"] {
   width: 16px;
   height: 16px;
   border: 1px solid var(--purple);
+  background-color: var(--faded-purple);
   border-radius: 5px;
   cursor: pointer;
 }
@@ -140,8 +141,8 @@ input[type="checkbox"]::before {
   position: absolute;
   display: none;
   top: 0;
-  width: 40%;
-  height: 70%;
+  width: 30%;
+  height: 60%;
   left: 3px;
   border: solid var(--purple);
   border-width: 0 3px 3px 0;
@@ -304,6 +305,13 @@ output {
   right: 0;
 }
 
+.show-more{
+  margin-top: 1rem;
+  width: 12%;
+  border-radius: 5px;
+  height: 5%;
+  padding-left: 0.2rem;
+}
 .show-more button {
   background-color: transparent;
   border: none;
@@ -315,9 +323,8 @@ output {
   line-height: 140%;
   height: 2rem;
 }
-.show-more button:hover {
+.show-more:hover, .show-more button:hover {
   cursor: pointer;
-  background-color: var(--faded-purple);
 }
 
 .show-more-icon{
