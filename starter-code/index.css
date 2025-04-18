@@ -21,6 +21,8 @@
   --border-radius: 0.5rem;
   --purple: #D3A0fA;
   --faded-purple: #2a2b37;
+  --bar-color: #2a2b37;
+  --toggle-bg:
 }
 
 body {
@@ -62,7 +64,7 @@ header {
 }
 .light-mode-icon:hover {
   cursor: pointer;
-  background-color: var(--faded-purple);
+  background-color: var(--bar-color);
 }
 
 .description-heading {
@@ -283,8 +285,8 @@ output {
 .bar-container {
   width: 70%;
   position: absolute;
+  background-color: var(--bar-color, var(--faded-purple));
   left: 2rem;
-  background-color: var(--faded-purple);
   height: 12px;
   margin: 0 0.5rem;
   border-radius: 0.25rem;

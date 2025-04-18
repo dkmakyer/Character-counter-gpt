@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const statText = document.querySelectorAll(".stat");
   const logoImage = document.getElementById("logo-image");
   const themeIcon = document.getElementById("theme-icon");
-  const barContainer = document.querySelectorAll(".bar-container");
   const noCharMessage = document.getElementById("no-char-message");
   const showMoreContainer = document.getElementById("show-more-container");
   const showMoreButton = document.getElementById("show-more-button");
@@ -29,23 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
       //for light mode
       document.documentElement.style.setProperty("--primary-bg", "#F2F2F7");
       document.documentElement.style.setProperty("--text-color", "#12131A");
+      document.documentElement.style.setProperty("--bar-color", "#E4E4EF");
       statText.forEach((stat) => (stat.style.color = "#12131A"));
       logoImage.setAttribute("src", "./assets/images/logo-light-theme.svg");
       themeIcon.setAttribute("src", "./assets/images/icon-moon.svg");
-      description.style.backgroundColor = "#DEBAFC";
-      barContainer.forEach(
-        (container) => (container.style.backgroundColor = "#DEBAFC")
-      );
+      description.style.backgroundColor = "#E4E4EF";
     } else {
       document.documentElement.style.setProperty("--primary-bg", "#12131A");
       document.documentElement.style.setProperty("--text-color", "#E4E4EF");
+      document.documentElement.style.setProperty("--bar-color", "#2a2b37");
       statText.forEach((stat) => (stat.style.color = "#12131A"));
       logoImage.setAttribute("src", "./assets/images/logo-dark-theme.svg");
       themeIcon.setAttribute("src", "./assets/images/icon-sun.svg");
       description.style.backgroundColor = "#21222C";
-      barContainer.forEach(
-        (container) => (container.style.backgroundColor = "#21222C")
-      );
     }
   });
 
