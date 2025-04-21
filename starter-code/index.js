@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // DOM Elements
   const description = document.getElementById("description");
   const charCount = document.getElementById("charCount");
   const wordCount = document.getElementById("wordCount");
@@ -18,14 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const showMoreContainer = document.getElementById("show-more-container");
   const showMoreButton = document.getElementById("show-more-button");
   const showMoreIcon = document.getElementById("show-more-icon");
+  const readingTimeDisplay = document.getElementById("reading-timer");
 
-  // State variables
+
   let modeToggled = false;
   let showMore = false;
 
-  // Initialize the app
+
   initEventListeners();
-  updateCaretIcon(); // Set initial caret icon
+  updateCaretIcon(); 
 
   function initEventListeners() {
     backgroundModeSetter.addEventListener("click", toggleTheme);
@@ -116,6 +116,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     wordCount.innerText = String(validWordCount).padStart(2, "0");
 
+    let numWordsPerMin = 20;
+    const readingTime = Math.ceil(validWordCount / numWordsPerMin); 
+    readingTimeDisplay.innerText = readingTime > 0 ? String(readingTime) + " minutes" : String(0) + " minute";
+
     let sentenceArray = descriptionText
       .split(/[.?!]+/)
       .filter((sentence) => sentence.trim() != "");
@@ -142,6 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateLetterDensity() {
     const descriptionText = description.value;
+    if (descriptionText.trim() === "") {
+      noCharMessage.style.display = "block"; 
+  } else {
+      noCharMessage.style.display = "none"; 
+  }
     const letterDensityList = document.getElementById("letter-density-list");
     letterDensityList.innerText = "";
 
@@ -158,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
       0
     );
 
-    noCharMessage.style.display = totalCharacters === 0 ? "block" : "none";
 
     let currentCharSum = textObject.size;
     if(currentCharSum < 5){
@@ -199,11 +207,5 @@ document.addEventListener("DOMContentLoaded", function () {
       percentage.innerText = `${value} (${currentPercentage}%)`;
       articleTag.appendChild(percentage);
     }
-
-    // Show no characters message if empty
-    if (totalCharacters === 0) {
-      noCharMessage.style.display = "block";
-    }
-    
   }
 });

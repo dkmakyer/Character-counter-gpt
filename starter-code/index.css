@@ -124,7 +124,7 @@ fieldset {
   border: none;
   gap: 12px;
   padding: 0;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
 }
 
 input[type="checkbox"] {
@@ -169,6 +169,7 @@ input[type="checkbox"]:checked::before {
   padding: 4px;
   border-radius: 4px;
   outline: none;
+  transform: translateX(5rem);
 }
 
 .styled-limiter::-webkit-outer-spin-button,
@@ -385,5 +386,8 @@ output {
     padding: 2rem 14rem;
     margin: 0 auto;
   max-width: 990px;
+  }
+  .styled-limiter{
+    transform: translateX(10rem);
   }
 }

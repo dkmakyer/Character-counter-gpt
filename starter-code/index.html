@@ -45,7 +45,7 @@
           <input type="number" id="characterLimitInput" class="styled-limiter hidden">
         </div>
       </div>
-      <span class="reading-time">Approx. reading time: &lt;1 minute</span>
+      <span class="reading-time">Approx. reading time: &lt;<span id="reading-timer">0 minute</span></span>
     </fieldset>
 
     <section class="stats" aria-labelledby="stats-details">
@@ -65,8 +65,8 @@
 
     <section aria-labelledby="letter-density">
       <h2 id="letter-density" class="letter-density-title">Letter Density</h2>
+      <p id="no-char-message">No characters found. Start typing to see letter density.</p>
       <div class="letter-density-list" id="letter-density-list">
-        <p id="no-char-message">No characters found. Start typing to see letter density.</p>
         <!-- <article class="letter-density-item" role="list-item">
           <span class="letter">E</span>
           <div class="bar-container">
