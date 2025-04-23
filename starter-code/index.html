@@ -26,27 +26,31 @@
       <h1>Analyze your text <span>in real-time.</span></h1>
     </section>
 
-    <section aria-labelledby="text-description">
-      <textarea class="description" placeholder="Start Typing here...(or paste your text)" id="description"></textarea>
-      <p class="error-message hidden" id="error-message">
-        <img src="./assets/images/icon-info.svg" alt="warning-icon"> Limit reached! your text exceeds <span id="set-limit">300</span> characters.
-      </p>
+    <section aria-labelledby="text-description" class="text-area-container">
+      <div>
+        <textarea class="description" placeholder="Start Typing here...(or paste your text)"
+          id="description"></textarea>
+        <p class="error-message hidden" id="error-message">
+          <img src="./assets/images/icon-info.svg" alt="warning-icon"> Limit reached! your text exceeds <span
+            id="set-limit">300</span> characters.
+        </p>
+      </div>
+      <fieldset>
+        <div class="options">
+          <div class="option-group">
+            <input type="checkbox" id="excludeSpaces" name="analysis-options">
+            <label for="excludeSpaces">Exclude Spaces</label>
+          </div>
+          <div class="option-group second-option">
+            <input type="checkbox" id="limit-checkbox" name="analysis-options">
+            <label for="limit-checkbox">Set Character Limit</label>
+            <input type="number" id="characterLimitInput" class="styled-limiter hidden">
+          </div>
+        </div>
+        <span class="reading-time">Approx. reading time: &lt;<span id="reading-timer">0 minute</span></span>
+      </fieldset>
     </section>
 
-    <fieldset>
-      <div class="options">
-        <div class="option-group">
-          <input type="checkbox" id="excludeSpaces" name="analysis-options">
-          <label for="excludeSpaces">Exclude Spaces</label>
-        </div>
-        <div class="option-group">
-          <input type="checkbox" id="limit-checkbox" name="analysis-options">
-          <label for="limit-checkbox">Set Character Limit</label>
-          <input type="number" id="characterLimitInput" class="styled-limiter hidden">
-        </div>
-      </div>
-      <span class="reading-time">Approx. reading time: &lt;<span id="reading-timer">0 minute</span></span>
-    </fieldset>
 
     <section class="stats" aria-labelledby="stats-details">
       <div class="stat stat1" role="figure" aria-label="Total characters">
@@ -105,8 +109,10 @@
       </div>
     </section>
 
-    <section class="show-more hidden" id="show-more-container" aria-label="Show more list details that do not fit on screen">
-      <button type="button" aria-expanded="false" id=show-more-button>See more</button><img class="show-more-icon" id="show-more-icon" src="./assets/images/dark-caret-down.svg" alt="show-more-icon">
+    <section class="show-more hidden" id="show-more-container"
+      aria-label="Show more list details that do not fit on screen">
+      <button type="button" aria-expanded="false" id=show-more-button>See more</button><img class="show-more-icon"
+        id="show-more-icon" src="./assets/images/dark-caret-down.svg" alt="show-more-icon">
     </section>
   </main>
   <script src="index.js"></script>

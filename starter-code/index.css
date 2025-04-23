@@ -81,6 +81,13 @@ header {
   font-family: "DMSansBold", sans-serif;
 }
 
+.text-area-container{
+  max-height: 303px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 40px;
+}
 textarea {
   min-width: 100%;
   line-height: 140%;
@@ -119,8 +126,6 @@ textarea:focus {
 fieldset {
   min-width: 343px;
   height: 29px;
-  display: grid;
-  grid-template-columns: 1fr;
   border: none;
   gap: 12px;
   padding: 0;
@@ -153,6 +158,11 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked::before {
   display: block;
 }
+.option-group{
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 
 .hidden {
   display: none;
@@ -169,7 +179,7 @@ input[type="checkbox"]:checked::before {
   padding: 4px;
   border-radius: 4px;
   outline: none;
-  transform: translateX(5rem);
+  transform: translateX(1rem);
 }
 
 .styled-limiter::-webkit-outer-spin-button,
@@ -388,6 +398,6 @@ output {
   max-width: 990px;
   }
   .styled-limiter{
-    transform: translateX(10rem);
+    transform: translateX(1rem);
   }
 }

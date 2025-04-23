@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateReadingTime(numOfWords) {
-    let numWordsPerMin = 20;
+    let numWordsPerMin = 200;
     const readingTime = Math.ceil(numOfWords / numWordsPerMin);
     readingTimeDisplay.innerText =
       readingTime > 0
