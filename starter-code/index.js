@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const setLimit = document.getElementById("set-limit");
   const errorMessage = document.getElementById("error-message");
   const excludeSpacesCheckbox = document.getElementById("excludeSpaces");
-  const backgroundModeSetter = document.getElementById("background-mode-setter");
+  const backgroundModeSetter = document.getElementById(
+    "background-mode-setter"
+  );
   const charTextTag = document.getElementById("char-text-tag");
   const statText = document.querySelectorAll(".stat");
   const logoImage = document.getElementById("logo-image");
@@ -19,13 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const showMoreIcon = document.getElementById("show-more-icon");
   const readingTimeDisplay = document.getElementById("reading-timer");
 
-
   let modeToggled = false;
   let showMore = false;
 
-
   initEventListeners();
-  updateCaretIcon(); 
+  updateCaretIcon();
+
+  window.addEventListener("beforeunload", cleanupEventListeners);
 
   function initEventListeners() {
     backgroundModeSetter.addEventListener("click", toggleTheme);
@@ -34,6 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
     charLimitInput.addEventListener("input", handleCharLimitInput);
     description.addEventListener("input", validateTextArea);
     showMoreContainer.addEventListener("click", toggleShowMore);
+  }
+
+  function cleanupEventListeners() {
+    backgroundModeSetter.removeEventListener("click", toggleTheme);
+    charLimitCheckbox.removeEventListener("click", toggleCharLimitInput);
+    excludeSpacesCheckbox.removeEventListener("change", validateTextArea);
+    charLimitInput.removeEventListener("input", handleCharLimitInput);
+    description.removeEventListener("input", validateTextArea);
+    showMoreContainer.removeEventListener("click", toggleShowMore);
   }
 
   function toggleTheme() {
@@ -48,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       themeIcon.setAttribute("src", "./assets/images/icon-moon.svg");
       description.style.backgroundColor = "#E4E4EF";
     } else {
-      // Dark mode 
+      // Dark mode
       document.documentElement.style.setProperty("--primary-bg", "#12131A");
       document.documentElement.style.setProperty("--text-color", "#E4E4EF");
       document.documentElement.style.setProperty("--bar-color", "#2a2b37");
@@ -57,20 +68,18 @@ document.addEventListener("DOMContentLoaded", function () {
       themeIcon.setAttribute("src", "./assets/images/icon-sun.svg");
       description.style.backgroundColor = "#21222C";
     }
-    updateCaretIcon(); 
+    updateCaretIcon();
   }
 
   function toggleCharLimitInput() {
-    charLimitInput.style.display = charLimitInput.style.display === "block" 
-      ? "none" 
-      : "block";
+    charLimitInput.style.display =
+      charLimitInput.style.display === "block" ? "none" : "block";
   }
 
   function handleCharLimitInput() {
     let userSetLimit = parseInt(charLimitInput.value);
-    setLimit.innerText = !isNaN(userSetLimit) && userSetLimit > 0 
-      ? userSetLimit 
-      : "00";
+    setLimit.innerText =
+      !isNaN(userSetLimit) && userSetLimit > 0 ? userSetLimit : "00";
     validateTextArea();
   }
 
@@ -84,7 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const iconBase = modeToggled ? "dark" : "light";
     const direction = showMore ? "up" : "down";
     showMoreButton.innerText = showMore ? "See less" : "See more";
-    showMoreIcon.setAttribute("src", `./assets/images/${iconBase}-caret-${direction}.svg`);
+    showMoreIcon.setAttribute(
+      "src",
+      `./assets/images/${iconBase}-caret-${direction}.svg`
+    );
   }
 
   function validateTextArea() {
@@ -93,43 +105,71 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCharacterLimit();
   }
 
-  function updateTextStats() {
-    const descriptionText = description.value;
-    
-    const processedText = excludeSpacesCheckbox.checked
-      ? descriptionText.replace(/\s+/g, "")
-      : descriptionText;
-    
-    charTextTag.innerText = excludeSpacesCheckbox.checked
-      ? "Total Characters(no space)"
-      : "Total Characters";
+  function updateCharCount(textLength) {
+    charCount.innerText = String(textLength).padStart(2, "0");
+  }
 
-    const descriptionTextLength = processedText.length;
-    charCount.innerText = String(descriptionTextLength).padStart(2, "0");
+  function updateWordCount(text) {
+    let wordArray = text.split(/[\s.,:;!?(){}\[\]]+/);
+    let validWordCount = updateValidWordCount(wordArray);
+    wordCount.innerText = String(validWordCount).padStart(2, "0");
+    updateReadingTime(validWordCount);
+  }
 
-    let wordArray = descriptionText.split(/[\s.,:;!?(){}\[\]]+/);
+  function updateValidWordCount(array) {
     let validWordCount = 0;
-    for (let word of wordArray) {
+    for (let word of array) {
       if (word.trim() !== "") {
         validWordCount++;
       }
     }
-    wordCount.innerText = String(validWordCount).padStart(2, "0");
+    return validWordCount;
+  }
 
+  function updateReadingTime(numOfWords) {
     let numWordsPerMin = 20;
-    const readingTime = Math.ceil(validWordCount / numWordsPerMin); 
-    readingTimeDisplay.innerText = readingTime > 0 ? String(readingTime) + " minutes" : String(0) + " minute";
+    const readingTime = Math.ceil(numOfWords / numWordsPerMin);
+    readingTimeDisplay.innerText =
+      readingTime > 0
+        ? String(readingTime) + " minutes"
+        : String(0) + " minute";
+  }
 
-    let sentenceArray = descriptionText
+  function updateSentenceCount(text) {
+    let sentenceArray = text
       .split(/[.?!]+/)
       .filter((sentence) => sentence.trim() != "");
     sentenceCount.innerText = String(sentenceArray.length).padStart(2, "0");
   }
 
+  function updateProcessedText(text){
+    const processedText = excludeSpacesCheckbox.checked
+    ? text.replace(/\s+/g, "")
+    : text;
+    return processedText;
+  }
+
+  function updateCharTextInfo(){
+    charTextTag.innerText = excludeSpacesCheckbox.checked
+    ? "Total Characters(no space)"
+    : "Total Characters";
+  }
+
+  function updateTextStats() {
+    const descriptionText = description.value;
+    const processedText = updateProcessedText(descriptionText);
+    const descriptionTextLength = processedText.length;
+
+    updateCharCount(descriptionTextLength);
+    updateWordCount(descriptionText);
+    updateSentenceCount(descriptionText);
+    updateCharTextInfo();
+  }
+
   function handleCharacterLimit() {
     const descriptionTextLength = description.value.length;
     let userSetLimit = parseInt(charLimitInput.value);
-    
+
     if (!isNaN(userSetLimit) && descriptionTextLength > userSetLimit) {
       description.style.border = "2px solid #FE8159";
       description.style.boxShadow = "0 0 5px 5px #FE8159";
@@ -147,10 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateLetterDensity() {
     const descriptionText = description.value;
     if (descriptionText.trim() === "") {
-      noCharMessage.style.display = "block"; 
-  } else {
-      noCharMessage.style.display = "none"; 
-  }
+      noCharMessage.style.display = "block";
+    } else {
+      noCharMessage.style.display = "none";
+    }
     const letterDensityList = document.getElementById("letter-density-list");
     letterDensityList.innerText = "";
 
@@ -167,17 +207,18 @@ document.addEventListener("DOMContentLoaded", function () {
       0
     );
 
-
     let currentCharSum = textObject.size;
-    if(currentCharSum < 5){
+    if (currentCharSum < 5) {
       showMoreContainer.classList.add("hidden");
-    }else{
+    } else {
       showMoreContainer.classList.remove("hidden");
     }
 
     let allLetters = Array.from(textObject.entries());
     let renderedObject = showMore ? allLetters : allLetters.slice(0, 5);
-    const sortedTextObject = Array.from(renderedObject).sort((a, b) => b[1] - a[1]);
+    const sortedTextObject = Array.from(renderedObject).sort(
+      (a, b) => b[1] - a[1]
+    );
 
     // Create letter density items directly using js
     for (let [key, value] of sortedTextObject) {

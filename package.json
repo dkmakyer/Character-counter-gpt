@@ -1,0 +1,27 @@
+{
+  "name": "character-counter",
+  "version": "1.0.0",
+  "description": "![Design preview for the Character counter coding challenge](./preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkmakyer/Character-counter-gpt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dkmakyer/Character-counter-gpt/issues"
+  },
+  "homepage": "https://github.com/dkmakyer/Character-counter-gpt#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
