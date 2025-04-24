@@ -1,8 +1,46 @@
+function updateCharCount(textLength) {
+  const charCount = document.getElementById("charCount");
+  charCount.innerText = String(textLength).padStart(2, "0");
+}
+
+function updateWordCount(text) {
+  const wordCount = document.getElementById("wordCount");
+  let wordArray = text.split(/[\s.,:;!?(){}\[\]]+/);
+  let validWordCount = updateValidWordCount(wordArray);
+  wordCount.innerText = String(validWordCount).padStart(2, "0");
+  updateReadingTime(validWordCount);
+}
+
+function updateValidWordCount(array) {
+  let validWordCount = 0;
+  for (let word of array) {
+    if (word.trim() !== "") {
+      validWordCount++;
+    }
+  }
+  return validWordCount;
+}
+
+function updateReadingTime(numOfWords) {
+  const readingTimeDisplay = document.getElementById("reading-timer");
+  let numWordsPerMin = 200;
+  const readingTime = Math.ceil(numOfWords / numWordsPerMin);
+  readingTimeDisplay.innerText =
+  readingTime > 0
+  ? String(readingTime) + " minutes"
+  : String(0) + " minute";
+}
+
+function updateSentenceCount(text) {
+  const sentenceCount = document.getElementById("sentenceCount");
+  let sentenceArray = text
+    .split(/[.?!]+/)
+    .filter((sentence) => sentence.trim() != "");
+  sentenceCount.innerText = String(sentenceArray.length).padStart(2, "0");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const description = document.getElementById("description");
-  const charCount = document.getElementById("charCount");
-  const wordCount = document.getElementById("wordCount");
-  const sentenceCount = document.getElementById("sentenceCount");
   const charLimitInput = document.getElementById("characterLimitInput");
   const charLimitCheckbox = document.getElementById("limit-checkbox");
   const setLimit = document.getElementById("set-limit");
@@ -19,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const showMoreContainer = document.getElementById("show-more-container");
   const showMoreButton = document.getElementById("show-more-button");
   const showMoreIcon = document.getElementById("show-more-icon");
-  const readingTimeDisplay = document.getElementById("reading-timer");
 
   let modeToggled = false;
   let showMore = false;
@@ -105,42 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCharacterLimit();
   }
 
-  function updateCharCount(textLength) {
-    charCount.innerText = String(textLength).padStart(2, "0");
-  }
-
-  function updateWordCount(text) {
-    let wordArray = text.split(/[\s.,:;!?(){}\[\]]+/);
-    let validWordCount = updateValidWordCount(wordArray);
-    wordCount.innerText = String(validWordCount).padStart(2, "0");
-    updateReadingTime(validWordCount);
-  }
-
-  function updateValidWordCount(array) {
-    let validWordCount = 0;
-    for (let word of array) {
-      if (word.trim() !== "") {
-        validWordCount++;
-      }
-    }
-    return validWordCount;
-  }
-
-  function updateReadingTime(numOfWords) {
-    let numWordsPerMin = 200;
-    const readingTime = Math.ceil(numOfWords / numWordsPerMin);
-    readingTimeDisplay.innerText =
-      readingTime > 0
-        ? String(readingTime) + " minutes"
-        : String(0) + " minute";
-  }
-
-  function updateSentenceCount(text) {
-    let sentenceArray = text
-      .split(/[.?!]+/)
-      .filter((sentence) => sentence.trim() != "");
-    sentenceCount.innerText = String(sentenceArray.length).padStart(2, "0");
-  }
 
   function updateProcessedText(text){
     const processedText = excludeSpacesCheckbox.checked
@@ -250,3 +251,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+module.exports = {updateCharCount, updateWordCount, updateSentenceCount, updateReadingTime};

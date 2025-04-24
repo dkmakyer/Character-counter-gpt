@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="stylesheet" href="index.css">
-
-  <title>Frontend Mentor | Character counter</title>
-</head>
-
-<body>
-  <main class="text-analyzer-container">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="index.css">
+    
+    <title>Frontend Mentor | Character counter</title>
+  </head>
+  
+  <body>
+    <main class="text-analyzer-container">
     <header class="header">
       <div class="theme-changer">
         <img src="./assets/images/logo-dark-theme.svg" id="logo-image" alt="counter-logo" aria-hidden="true">
@@ -21,18 +21,18 @@
         </span>
       </div>
     </header>
-
+    
     <section class="description-heading" aria-labelledby="main-heading">
       <h1>Analyze your text <span>in real-time.</span></h1>
     </section>
-
+    
     <section aria-labelledby="text-description" class="text-area-container">
       <div>
         <textarea class="description" placeholder="Start Typing here...(or paste your text)"
-          id="description"></textarea>
+        id="description"></textarea>
         <p class="error-message hidden" id="error-message">
           <img src="./assets/images/icon-info.svg" alt="warning-icon"> Limit reached! your text exceeds <span
-            id="set-limit">300</span> characters.
+          id="set-limit">300</span> characters.
         </p>
       </div>
       <fieldset>
@@ -50,8 +50,8 @@
         <span class="reading-time">Approx. reading time: &lt;<span id="reading-timer">0 minute</span></span>
       </fieldset>
     </section>
-
-
+    
+    
     <section class="stats" aria-labelledby="stats-details">
       <div class="stat stat1" role="figure" aria-label="Total characters">
         <output class="number" id="charCount">00</output>
@@ -66,7 +66,7 @@
         <p>Sentence Count</p>
       </div>
     </section>
-
+    
     <section aria-labelledby="letter-density">
       <h2 id="letter-density" class="letter-density-title">Letter Density</h2>
       <p id="no-char-message">No characters found. Start typing to see letter density.</p>
@@ -78,45 +78,17 @@
           </div>
           <span class="percentage">40 (16.06%)</span>
         </article>
-        <article class="letter-density-item" role="list-item">
-          <span class="letter">I</span>
-          <div class="bar-container">
-            <div class="b0ar" style="width: 19%;"></div>
-          </div>
-          <span class="percentage">29 (11.65%)</span>
-        </article>
-        <article class="letter-density-item" role="list-item">
-          <span class="letter">T</span>
-          <div class="bar-container">
-            <div class="bar" style="width: 15%;"></div>
-          </div>
-          <span class="percentage">28 (11.24%)</span>
-        </article>
-        <article class="letter-density-item" role="list-item">
-          <span class="letter">O</span>
-          <div class="bar-container">
-            <div class="bar" style="width: 11%;"></div>
-          </div>
-          <span class="percentage">22 (8.84%)</span>
-        </article>
-        <article class="letter-density-item" role="list-item">
-          <span class="letter">N</span>
-          <div class="bar-container">
-            <div class="bar" style="width: 5%;"></div>
-          </div>
-          <span class="percentage">21 (8.43%)</span>
-        </article> -->
+        -->
       </div>
     </section>
-
+    
     <section class="show-more hidden" id="show-more-container"
-      aria-label="Show more list details that do not fit on screen">
-      <button type="button" aria-expanded="false" id=show-more-button>See more</button><img class="show-more-icon"
-        id="show-more-icon" src="./assets/images/dark-caret-down.svg" alt="show-more-icon">
-    </section>
-  </main>
-  <script src="index.js"></script>
-
+    aria-label="Show more list details that do not fit on screen">
+    <button type="button" aria-expanded="false" id=show-more-button>See more</button><img class="show-more-icon"
+    id="show-more-icon" src="./assets/images/dark-caret-down.svg" alt="show-more-icon">
+  </section>
+</main>
+<script src="index.js"></script>
 </body>
 
 </html>
