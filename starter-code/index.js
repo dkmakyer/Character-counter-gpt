@@ -26,9 +26,11 @@ function updateReadingTime(numOfWords) {
   let numWordsPerMin = 200;
   const readingTime = Math.ceil(numOfWords / numWordsPerMin);
   readingTimeDisplay.innerText =
-  readingTime > 0
-  ? String(readingTime) + " minutes"
-  : String(0) + " minute";
+    readingTime === 1
+      ? String(readingTime) + " minute"
+      : readingTime > 1
+      ? String(readingTime) + " minutes"
+      : String(0) + " minute";
 }
 
 function updateSentenceCount(text) {
@@ -142,18 +144,17 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCharacterLimit();
   }
 
-
-  function updateProcessedText(text){
+  function updateProcessedText(text) {
     const processedText = excludeSpacesCheckbox.checked
-    ? text.replace(/\s+/g, "")
-    : text;
+      ? text.replace(/\s+/g, "")
+      : text;
     return processedText;
   }
 
-  function updateCharTextInfo(){
+  function updateCharTextInfo() {
     charTextTag.innerText = excludeSpacesCheckbox.checked
-    ? "Total Characters(no space)"
-    : "Total Characters";
+      ? "Total Characters(no space)"
+      : "Total Characters";
   }
 
   function updateTextStats() {
@@ -252,4 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-module.exports = {updateCharCount, updateWordCount, updateSentenceCount, updateReadingTime};
+module.exports = {
+  updateCharCount,
+  updateWordCount,
+  updateSentenceCount,
+  updateReadingTime,
+};

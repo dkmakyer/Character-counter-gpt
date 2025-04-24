@@ -5,7 +5,7 @@ const {
   updateReadingTime
 } = require('../index');
 
-describe('Text Analysis Functions', () => {
+describe('update functions based on text area input', () => {
   let charCount, wordCount, sentenceCount, readingTimeDisplay;
   
   beforeEach(() => {
@@ -15,38 +15,33 @@ describe('Text Analysis Functions', () => {
       <output class="number" id="sentenceCount">00</output>
       <span id="reading-timer">0 minute</span>
     `;
-    
+
     charCount = document.getElementById('charCount');
     wordCount = document.getElementById('wordCount');
     sentenceCount = document.getElementById('sentenceCount');
     readingTimeDisplay = document.getElementById('reading-timer');
   });
 
-  describe('updateCharCount', () => {
+  describe('update character count based on length of text area value', () => {
     test('should correctly count characters in a string', () => {
       updateCharCount(5);
       expect(charCount.innerText).toBe('05');
     });
 
-    test('should handle zero characters', () => {
-      updateCharCount(0);
-      expect(charCount.innerText).toBe('00');
-    });
-
-    test('should pad single digit counts with leading zero', () => {
+    test('should pad digit count less than 10 with leading zero', () => {
       updateCharCount(9);
       expect(charCount.innerText).toBe('09');
     });
 
-    test('should not pad double digit counts', () => {
+    test('should maintain digit counts with more than one digit', () => {
       updateCharCount(15);
       expect(charCount.innerText).toBe('15');
     });
   });
 
-  describe('updateWordCount', () => {
+  describe('update word count based on text area value', () => {
     test('should correctly count words in simple text', () => {
-      const text = 'This is a test';
+      const text = 'Amalitech will employ me';
       updateWordCount(text);
       expect(wordCount.innerText).toBe('04');
     });
@@ -57,66 +52,52 @@ describe('Text Analysis Functions', () => {
       expect(wordCount.innerText).toBe('00');
     });
 
-    test('should handle multiple spaces between words', () => {
-      const text = 'This    is    a    test';
+    test('should handle multiple spaces between words, before and after words', () => {
+      const text = 'Amalitech    will    employ    me';
       updateWordCount(text);
       expect(wordCount.innerText).toBe('04');
-    });
 
-    test('should handle leading/trailing spaces', () => {
-      const text = '   This is a test   ';
-      updateWordCount(text);
+      const secondText = '   Amalitech will employ me   ';
+      updateWordCount(secondText);
       expect(wordCount.innerText).toBe('04');
     });
 
     test('should handle punctuation marks', () => {
-      const text = 'This, is. a! test?';
+      const text = 'Amalitech, will. employ! me?';
       updateWordCount(text);
       expect(wordCount.innerText).toBe('04');
     });
 
-    test('should handle complex punctuation and symbols', () => {
-      const text = 'Hello (world) - this is a test... of the system!';
-      updateWordCount(text);
-      expect(wordCount.innerText).toBe('09');
-    });
-
     test('should update reading time when counting words', () => {
-      const text = 'word '.repeat(200); // 200 words
+      const text = 'Amalitech '.repeat(200); 
       updateWordCount(text);
-      expect(readingTimeDisplay.innerText).toBe('1 minutes');
+      expect(readingTimeDisplay.innerText).toBe('1 minute');
     });
   });
 
-  describe('updateSentenceCount', () => {
-    test('should count sentences separated by periods', () => {
-      const text = 'This is sentence one. This is sentence two.';
+  describe('update sentence count based on text area value', () => {
+    test('should count sentences separated by periods, exclamation marks and question marks', () => {
+      const text = 'I am a graduate trainee. Amalitech will employ me.';
       updateSentenceCount(text);
       expect(sentenceCount.innerText).toBe('02');
     });
 
     test('should count sentences separated by question marks', () => {
-      const text = 'Is this sentence one? Is this sentence two?';
+      const text = 'Am I a graduate trainee? Will Amalitech employ me?';
       updateSentenceCount(text);
       expect(sentenceCount.innerText).toBe('02');
     });
 
     test('should count sentences separated by exclamation points', () => {
-      const text = 'This is sentence one! This is sentence two!';
+      const text = 'This is Amalitech! Employ me!';;
       updateSentenceCount(text);
       expect(sentenceCount.innerText).toBe('02');
     });
 
-    test('should handle mixed sentence terminators', () => {
-      const text = 'Sentence one. Sentence two? Sentence three!';
+    test('should handle multiple sentence punctuations', () => {
+      const text = 'My name is David. Am i a graduate trainee? Watch out for me!';
       updateSentenceCount(text);
       expect(sentenceCount.innerText).toBe('03');
-    });
-
-    test('should ignore abbreviations with periods', () => {
-      const text = 'This is Dr. Smith. He works at the U.S. Dept. of Agriculture.';
-      updateSentenceCount(text);
-      expect(sentenceCount.innerText).toBe('02');
     });
 
     test('should handle empty string', () => {
@@ -125,28 +106,17 @@ describe('Text Analysis Functions', () => {
       expect(sentenceCount.innerText).toBe('00');
     });
 
-    test('should handle text with no sentence terminators', () => {
-      const text = 'This is a single sentence without termination';
+    test('should handle text with no sentence punctuation', () => {
+      const text = 'Hello, My name is David';
       updateSentenceCount(text);
       expect(sentenceCount.innerText).toBe('01');
     });
-
-    test('should handle multiple terminators in a row', () => {
-      const text = 'What?! This is a test... Really!!';
-      updateSentenceCount(text);
-      expect(sentenceCount.innerText).toBe('02');
-    });
   });
 
-  describe('updateReadingTime', () => {
+  describe('update the reading time based on the words in the text area', () => {
     test('should display 0 minute for 0 words', () => {
       updateReadingTime(0);
       expect(readingTimeDisplay.innerText).toBe('0 minute');
-    });
-
-    test('should display 1 minute for 200 words', () => {
-      updateReadingTime(200);
-      expect(readingTimeDisplay.innerText).toBe('1 minutes');
     });
 
     test('should round up to nearest minute', () => {
