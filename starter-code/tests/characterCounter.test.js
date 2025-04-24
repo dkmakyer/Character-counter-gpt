@@ -2,24 +2,69 @@ const {
   updateCharCount,
   updateWordCount,
   updateSentenceCount,
-  updateReadingTime
+  updateReadingTime, 
 } = require('../index');
 
 describe('update functions based on text area input', () => {
-  let charCount, wordCount, sentenceCount, readingTimeDisplay;
+  let charCount, wordCount, sentenceCount, readingTimeDisplay, description, errorMessage, setLimit;
   
   beforeEach(() => {
     document.body.innerHTML = `
-      <output class="number" id="charCount">00</output>
-      <output class="number" id="wordCount">00</output>
-      <output class="number" id="sentenceCount">00</output>
-      <span id="reading-timer">0 minute</span>
+    <section aria-labelledby="text-description" class="text-area-container">
+      <div>
+        <textarea class="description" placeholder="Start Typing here...(or paste your text)"
+        id="description"></textarea>
+        <p class="error-message hidden" id="error-message">
+          <img src="./assets/images/icon-info.svg" alt="warning-icon"> Limit reached! your text exceeds <span
+          id="set-limit">300</span> characters.
+        </p>
+      </div>
+      <fieldset>
+        <div class="options">
+          <div class="option-group">
+            <input type="checkbox" id="excludeSpaces" name="analysis-options">
+            <label for="excludeSpaces">Exclude Spaces</label>
+          </div>
+          <div class="option-group second-option">
+            <input type="checkbox" id="limit-checkbox" name="analysis-options">
+            <label for="limit-checkbox">Set Character Limit</label>
+            <input type="number" id="characterLimitInput" class="styled-limiter hidden">
+          </div>
+        </div>
+        <span class="reading-time">Approx. reading time: &lt;<span id="reading-timer">0 minute</span></span>
+      </fieldset>
+    </section>
+    
+    
+    <section class="stats" aria-labelledby="stats-details">
+      <div class="stat stat1" role="figure" aria-label="Total characters">
+        <output class="number" id="charCount">00</output>
+        <p id="char-text-tag">Total Characters</p>
+      </div>
+      <div class="stat stat2" role="figure" aria-label="Word count">
+        <output class="number" id="wordCount">00</output>
+        <p>Word Count</p>
+      </div>
+      <div class="stat stat3" role="figure" aria-label="Sentence count">
+        <output class="number" id="sentenceCount">00</output>
+        <p>Sentence Count</p>
+      </div>
+    </section>
     `;
 
+    description = document.getElementById('description');
+    errorMessage = document.getElementById('error-message');
+    setLimit = document.getElementById('set-limit');
+    charLimitInput = document.getElementById('characterLimitInput');
+    charLimitCheckbox = document.getElementById('limit-checkbox');
     charCount = document.getElementById('charCount');
     wordCount = document.getElementById('wordCount');
     sentenceCount = document.getElementById('sentenceCount');
     readingTimeDisplay = document.getElementById('reading-timer');
+
+  });
+
+  afterEach(() => {
   });
 
   describe('update character count based on length of text area value', () => {

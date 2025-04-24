@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCharacterLimit();
   }
 
+
   function updateProcessedText(text) {
     const processedText = excludeSpacesCheckbox.checked
       ? text.replace(/\s+/g, "")
@@ -253,9 +254,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-module.exports = {
-  updateCharCount,
-  updateWordCount,
-  updateSentenceCount,
-  updateReadingTime,
-};
+module.exports = { updateCharCount, updateWordCount, updateSentenceCount, updateReadingTime };
