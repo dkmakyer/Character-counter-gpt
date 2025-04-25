@@ -61,7 +61,6 @@ describe('update functions based on text area input', () => {
     wordCount = document.getElementById('wordCount');
     sentenceCount = document.getElementById('sentenceCount');
     readingTimeDisplay = document.getElementById('reading-timer');
-
   });
 
   afterEach(() => {
