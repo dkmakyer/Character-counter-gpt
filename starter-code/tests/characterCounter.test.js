@@ -2,18 +2,14 @@
  * @jest-environment jsdom
  */
 
-const {updateCharCount, updateWordCount, updateSentenceCount, updateValidWordCount, handleCharacterLimit} = require('../index');
+const {updateCharCount, updateSentenceCount, updateReadingTime, updateValidWordCount, handleCharacterLimit} = require('../index');
 
-function updateReadingTime(readingTimeElement, numOfWords) {
-  let numWordsPerMin = 200;
-  const readingTime = Math.ceil(numOfWords / numWordsPerMin);
-  readingTimeElement.innerText =
-    readingTime === 1
-      ? String(readingTime) + " minute"
-      : readingTime > 1
-      ? String(readingTime) + " minutes"
-      : String(0) + " minute";
+function updateWordCount(wordCountElement, text) {
+  let wordArray = text.split(/[\s.,:;!?(){}\[\]]+/);
+  let validWordCount = updateValidWordCount(wordArray);
+  wordCountElement.innerText = String(validWordCount).padStart(2, "0");
 }
+
 
 describe('update functions based on text area input', () => {
   let charCount, wordCount, sentenceCount, readingTimeDisplay, description, errorMessage, setLimit;
@@ -99,31 +95,31 @@ describe('update functions based on text area input', () => {
     });
   });
 
-  // describe('update word count based on text area value', () => {
-  //   test('should correctly count words in simple text', () => {
-  //     const text = 'Amalitech will employ me';
-  //     updateWordCount(wordCount, text);
-  //     expect(wordCount.innerText).toBe('04');
-  //   });
+  describe('update word count based on text area value', () => {
+    test('should correctly count words in simple text', () => {
+      const text = 'Amalitech will employ me';
+      updateWordCount(wordCount, text);
+      expect(wordCount.innerText).toBe('04');
+    });
 
-  //   test('should handle empty string', () => {
-  //     const text = '';
-  //     updateWordCount(wordCount, text);
-  //     expect(wordCount.innerText).toBe('00');
-  //   });
+    test('should handle empty string', () => {
+      const text = '';
+      updateWordCount(wordCount, text);
+      expect(wordCount.innerText).toBe('00');
+    });
 
-  //   test('should handle multiple spaces between words, before and after words', () => {
-  //     const text = 'Amalitech    will    employ    me';
-  //     updateWordCount(wordCount, text);
-  //     expect(wordCount.innerText).toBe('04');
-  //   });
+    test('should handle multiple spaces between words, before and after words', () => {
+      const text = 'Amalitech    will    employ    me';
+      updateWordCount(wordCount, text);
+      expect(wordCount.innerText).toBe('04');
+    });
 
-  //   test('should handle punctuation marks', () => {
-  //     const text = 'Amalitech, will. employ! me?';
-  //     updateWordCount(wordCount, text);
-  //     expect(wordCount.innerText).toBe('04');
-  //   });
-  // });
+    test('should handle punctuation marks', () => {
+      const text = 'Amalitech, will. employ! me?';
+      updateWordCount(wordCount, text);
+      expect(wordCount.innerText).toBe('04');
+    });
+  });
 
   describe('update sentence count based on text area value', () => {
     test('should count sentences separated by periods, exclamation marks and question marks', () => {
