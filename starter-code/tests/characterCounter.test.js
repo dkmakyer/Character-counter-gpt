@@ -3,6 +3,10 @@ const {
   updateWordCount,
   updateSentenceCount,
   updateReadingTime, 
+  validateTextArea,
+  updateTextStats,
+  updateLetterDensity,
+  handleCharacterLimit
 } = require('../index');
 
 describe('update functions based on text area input', () => {
@@ -61,6 +65,8 @@ describe('update functions based on text area input', () => {
     wordCount = document.getElementById('wordCount');
     sentenceCount = document.getElementById('sentenceCount');
     readingTimeDisplay = document.getElementById('reading-timer');
+
+    // document.addEventListener("input", validateTextArea);
   });
 
   afterEach(() => {
