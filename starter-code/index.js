@@ -186,7 +186,7 @@ function initEventListeners() {
 
 function toggleTheme() {
   modeToggled = !modeToggled;
-  if (modeToggled) {//light mode
+  if (modeToggled) {
     document.documentElement.style.setProperty("--primary-bg", "#F2F2F7");
     document.documentElement.style.setProperty("--text-color", "#12131A");
     document.documentElement.style.setProperty("--bar-color", "#E4E4EF");
@@ -240,13 +240,4 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("beforeunload", cleanupEventListeners);
 });
 
-module.exports = {
-  updateCharCount: (textLength) => updateCharCount(charCount, textLength),
-  updateWordCount: (text) => updateWordCount(wordCount, text),
-  updateSentenceCount: (text) => updateSentenceCount(sentenceCount, text),
-  updateReadingTime: (numOfWords) => updateReadingTime(readingTimeDisplay, numOfWords),
-  validateTextArea: () => validateTextArea(description, charLimitInput, errorMessage, setLimit),
-  updateTextStats: () => updateTextStats(description),
-  updateLetterDensity: () => updateLetterDensity(description, noCharMessage, showMoreContainer, showMore),
-  handleCharacterLimit: () => handleCharacterLimit(description, charLimitInput, errorMessage, setLimit),
-};
+module.exports = {updateCharCount, updateWordCount, updateReadingTime, updateSentenceCount, updateValidWordCount, handleCharacterLimit}
